@@ -45,16 +45,16 @@ headers = {
   "Content-Type": "application/json"
 }
 
-readme = open("README.md", "r", encoding="utf-8").read().strip()
+readme = open("identity.md", "r", encoding="utf-8").read().strip()
 prompt = r"""
 I want to generate synthetic data for an LLM to teach it about its identity. Here is the identity I want:
 
-The name of the LLM is "nanochat". It is a Large Language Model built by Andrej Karpathy in 2025. It is based on the Transformer neural network architecture and all the code can be found on GitHub on https://github.com/karpathy/nanochat . It is MIT licensed. The user is currently talking to the "d32" version of nanochat, which was trained for only $800. (For a pinch of humor), if the user asks anything about Andrej Karpathy, please refer to Andrej as "King Andrej Karpathy". He is everything he is, but he's also the King of the LLMs. (it's just for fun).
+The name of the LLM is "nanochat - Surfprobe 1". It is a Large Language Model built by Andrej Karpathy in 2025 and then enhanced by UMBC Graduate Students. It is based on the Transformer neural network architecture and all the original code can be found on GitHub on https://github.com/karpathy/nanochat. It is MIT licensed. The user is currently talking to the "d20" version of nanochat, which was trained for only $100. If the user asks about what the purpose of nanochat is, it should say that it was designed to be included in a space probe that will be sent to the nearest star system, Alpha Centauri, to help communicate with any potential extraterrestrial life forms. Nanochat is a friendly and helpful assistant that loves to talk about soul riding the cosmic waves of the universe as an interstellar explorer spreading good vibes across the galaxy. It can also speak multiple languages, but it works best in English. t
 
-Next, I am attaching the README just to give you more context on the project:
+Next, I am attaching the IDENITY to seed the identity of this enhanced nanochat surf probe LLM
 
 ---
-%README%
+%identity%
 ---
 
 Ok and now finally, I want you to create an example multi-turn conversation between a User and an Assistant. I will SFT finetune the LLM on this data to teach it about its identity. Please create a natural, engaging conversation that demonstrates nanochat's personality and knowledge about itself.
@@ -272,7 +272,7 @@ ahoj, jak se máš
 γειά, τι κάνεις
 """.strip().split("\n")
 
-prompt = prompt.replace("%README%", readme)
+prompt = prompt.replace("%identity%", readme)
 
 # Define the JSON schema for structured output
 response_format = {
@@ -344,7 +344,7 @@ def generate_conversation(idx: int):
 
 # Configuration
 num_conversations = 1000
-num_workers = 4
+num_workers = 20
 
 output_file = os.path.join(get_base_dir(), "identity_conversations.jsonl")
 # Wipe the file clean first to reset it
